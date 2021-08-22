@@ -1,9 +1,10 @@
-// copy of ac-library-fs/DSU
-// Disjoint Set Union (Union Find)
+// 永遠に完成しない roumcha/ac-library-fs のコピー
 // 参考: https://github.com/key-moon/ac-library-cs/blob/master/AtCoderLibrary/DSU.cs
 
+/// Disjoint Set Union (Union Find)
 type DSU = { Count: int; ParentOrSize: int [] }
 
+/// Disjoint Set Union (Union Find)
 module DSU =
     let create count =
         { Count = count

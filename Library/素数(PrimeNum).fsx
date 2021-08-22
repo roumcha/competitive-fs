@@ -1,6 +1,6 @@
 /// ここにあるもの:\
 /// 素数ですか, 素数一覧, 素因数分解
-module PrimeNumbers =
+module PrimeNum =
     open System.Collections.Generic
 
     /// 素数ですか - O(√n)

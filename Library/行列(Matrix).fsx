@@ -2,11 +2,11 @@
 /// 文字列形式に変換
 module Matrix =
     /// 文字列形式に変換
-    let toString matrix =
+    let inline toString matrix =
         { 0 .. Array2D.length1 matrix - 1 }
         |> Seq.map
             (fun i ->
-                matrix.[i, *]
-                |> Seq.map string
-                |> String.concat " ")
-        |> String.concat "\n"
+                { 0 .. Array2D.length2 - 1 }
+                |> Seq.map (fun j -> matrix.[i, j])
+                |> fun sq -> System.String.Join(' ', sq))
+        |> fun sq -> System.String.Join(' ', sq)

@@ -1,5 +1,6 @@
 // experimental
 // /, % がまだ
+
 /// Static ModInt
 type SModInt =
     { V: uint32 }

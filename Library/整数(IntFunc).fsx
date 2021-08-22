@@ -1,6 +1,6 @@
 /// ここにあるもの:\
 /// 商と余り, 切り上げ除算, 範囲の総和, 最大公約数, 最大公約数I, 最小公倍数, 最小公倍数I
-module IntCalc =
+module IntFunc =
     /// 商と余り - O(1)\
     /// int64 に変更可。bigInt には bigInt.DivRem がある。
     let divRem x y : int * int = System.Math.DivRem(x, y)
