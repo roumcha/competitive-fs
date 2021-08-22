@@ -1,0 +1,92 @@
+{
+    "ReadLine": {
+        "prefix": "cr",
+        "body": "stdin.ReadLine()"
+    },
+    "Stdin MultipleRead": {
+        "prefix": "cr-map",
+        "body": [
+            "stdin.ReadLine().Split()",
+            "${1:|> Array.map }",
+            "${0:|> fun a -> a.[0], a.[1], a.[2], a.[3]}"
+        ]
+    },
+    "Stdin MatrixRead": {
+        "prefix": "cr-matrix",
+        "body": [
+            "Array.init h (fun _ ->",
+            "    stdin.ReadLine().Split()",
+            "    ${1:|> Array.map })",
+            "|> array2D"
+        ]
+    },
+    "Printfn": {
+        "prefix": "pfn",
+        "body": "printfn \"${1:%A}\" "
+    },
+    "WriteLine": {
+        "prefix": "cw",
+        "body": "stdout.WriteLine"
+    },
+    "Stdout MatrixWrite": {
+        "prefix": "cw-matrix",
+        "body": [
+            "{ 0 .. ${1:h - 1} }",
+            "|> Seq.map (fun i ->",
+            "    { 0 .. ${2:w - 1} }",
+            "    |> Seq.map (fun j -> ${0:matrix}.[i, j] |> string)",
+            "    |> String.concat \" \")",
+            "|> String.concat \"\\n\"",
+            "|> stdout.WriteLine\n"
+        ]
+    },
+    "If": {
+        "prefix": "if",
+        "body": "if $0 then"
+    },
+    "Elif": {
+        "prefix": "elif",
+        "body": "elif $0 then"
+    },
+    "Match": {
+        "prefix": "match",
+        "body": "match $0 with"
+    },
+    "True-False": {
+        "prefix": "|tf",
+        "body": [
+            "| true -> $0",
+            "| false -> "
+        ]
+    },
+    "Some-None": {
+        "prefix": "|sn",
+        "body": [
+            "| Some ${1:x} -> $0",
+            "| None -> "
+        ]
+    },
+    "List Pattern Match": {
+        "prefix": "|list",
+        "body": [
+            "| [] -> $0",
+            "| head :: tail -> "
+        ]
+    },
+    "Lib": {
+        "prefix": "lib",
+        "body": [
+            "// ---------- Lib --------------",
+            "\n$0",
+            "// ---------- End Lib ----------"
+        ]
+    },
+    "Line": {
+        "prefix": "line",
+        "body": "// -----------------------------"
+    },
+    "EntryPoint": {
+        "prefix": "ep",
+        "body": "[<EntryPoint>]"
+    }
+}
