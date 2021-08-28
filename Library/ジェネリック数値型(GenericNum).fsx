@@ -3,6 +3,4 @@
 module NumericLiteralG =
     let inline FromZero () = LanguagePrimitives.GenericZero
     let inline FromOne () = LanguagePrimitives.GenericOne
-
-    let inline FromInt32 n =
-        Seq.sumBy (fun _ -> FromOne()) { 1 .. n }
+    let inline FromInt32 n = Seq.sumBy (fun _ -> FromOne()) { 1 .. n }

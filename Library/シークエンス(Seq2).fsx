@@ -29,7 +29,6 @@ module Seq2 =
                 match buf |> List.tryFindIndex ((=) h) with
                 | Some x -> Some(h, (List.length buf) - x - 1, i)
                 | None -> lp (i + 1) (h :: buf) t
-
         Seq.toList source |> lp 0 []
 
     /// 連長圧縮 - O(N)
@@ -39,7 +38,6 @@ module Seq2 =
             | [], res -> res
             | sh :: st, (item, cnt) :: rt when sh = item -> lp ((item, cnt + 1) :: rt) st
             | sh :: st, _ -> lp ((sh, 1) :: res) st
-
         source |> Seq.toList |> lp [] |> Seq.rev
 
     /// 交互に分ける - O(N)

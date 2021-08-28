@@ -5,7 +5,6 @@
 type SModInt =
     { V: uint32 }
     override this.ToString() = string this.V
-
 /// Static ModInt
 module SModInt =
     [<Literal>]
@@ -20,21 +19,15 @@ module SModInt =
     let value (smodint: SModInt) = smodint.V
 
 type SModInt with
-    static member inline (+)(x: SModInt, y: SModInt) = SModInt.FromUInt32(x.V + y.V)
+    static member (+)(x: SModInt, y: SModInt) = SModInt.FromUInt32(x.V + y.V)
     static member inline (+)(x: SModInt, y) = SModInt.FromUInt32(x.V + uint32 y)
     static member inline (+)(x, y: SModInt) = SModInt.FromUInt32(uint32 x + y.V)
-    static member inline (-)(x: SModInt, y: SModInt) = SModInt.FromUInt32(x.V - y.V)
+    static member (-)(x: SModInt, y: SModInt) = SModInt.FromUInt32(x.V - y.V)
     static member inline (-)(x: SModInt, y) = SModInt.FromUInt32(x.V - uint32 y)
     static member inline (-)(x, y: SModInt) = SModInt.FromUInt32(uint32 x - y.V)
-
-    static member inline (*)(x: SModInt, y) =
-        SModInt.FromUInt64(uint64 x.V * uint64 y)
-
-    static member inline (*)(x, y: SModInt) =
-        SModInt.FromUInt64(uint64 x * uint64 y.V)
-
-    static member (*)(x: SModInt, y: SModInt) =
-        SModInt.FromUInt64(uint64 x.V * uint64 y.V)
+    static member (*)(x: SModInt, y: SModInt) = SModInt.FromUInt64(uint64 x.V * uint64 y.V)
+    static member inline (*)(x: SModInt, y) = SModInt.FromUInt64(uint64 x.V * uint64 y)
+    static member inline (*)(x, y: SModInt) = SModInt.FromUInt64(uint64 x * uint64 y.V)
 
 /// 1N, 2N, ... と書ける
 module NumericLiteralN = SModInt // G(I)NQRZ しか suffix 空いてないみたい...
