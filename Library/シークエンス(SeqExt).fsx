@@ -1,6 +1,6 @@
 /// ここにあるもの:\
 /// 最初の重複を探す, 連長圧縮, 交互に分ける
-module Seq2 =
+module SeqExt =
     /// ソートして最初の重複を探す - O(N)
     /// 0個以上、要素が = < > で比較できるとき
     let tryFirstDup source =
