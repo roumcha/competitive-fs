@@ -15,7 +15,7 @@ module PrimeNum =
         | 0, _ -> true
         | -1, _
         | _, true -> false
-        | _, false ->
+        | _, _ ->
             seq {
                 let mutable i = g3
                 while i * i <= n do
@@ -41,8 +41,8 @@ module PrimeNum =
         let mutable x = n
         let mutable i = g3
         seq {
-            while x % g2 = 0 do
-                x <- x / 2
+            while x % g2 = 0G do
+                x <- x / g2
                 yield g2
             while i * i <= x do
                 match x % i = 0G with

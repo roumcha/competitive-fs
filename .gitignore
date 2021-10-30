@@ -1,6 +1,5 @@
 .ionide
-.vscode
 .fake
 .exe
 .dll
-\#実験用.fsx
+\#playground.fsx
