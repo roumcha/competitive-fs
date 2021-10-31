@@ -1,9 +1,9 @@
 /// ここにあるもの:\
 /// 最初の重複を探す, 連長圧縮, 交互に分ける
 module SeqExt =
-    /// ソートして最初の重複を探す - O(N)
+    /// 最初の重複を探す - O(N log N)
     /// 0個以上、要素が = < > で比較できるとき
-    let tryFirstDup source =
+    let tryFindDup source =
         match source with
         | []
         | [ _ ] -> None
@@ -18,10 +18,9 @@ module SeqExt =
                 |> function
                     | Some ind -> Some(snd ary.[ind], fst ary.[ind], fst ary.[ind + 1])
                     | None -> None
-
     /// 最初の重複を探す - O(N^2)
     /// 0個以上、要素が = で比較できるとき
-    let tryFirstDupNoSort source =
+    let tryFindDup2 source =
         let rec lp i buf =
             function
             | [] -> None
@@ -30,7 +29,6 @@ module SeqExt =
                 | Some x -> Some(h, (List.length buf) - x - 1, i)
                 | None -> lp (i + 1) (h :: buf) t
         Seq.toList source |> lp 0 []
-
     /// 連長圧縮 - O(N)
     let runLengthEncode source =
         let rec lp res src =
@@ -39,7 +37,6 @@ module SeqExt =
             | sh :: st, (item, cnt) :: rt when sh = item -> lp ((item, cnt + 1) :: rt) st
             | sh :: st, _ -> lp ((sh, 1) :: res) st
         source |> Seq.toList |> lp [] |> Seq.rev
-
     /// 交互に分ける - O(N)
     let divideAlternately source =
         source

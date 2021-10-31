@@ -2,8 +2,7 @@
 /// 素数ですか, 素数一覧, 素因数分解
 module PrimeNum =
     open System.Collections.Generic
-    /// ジェネリック数値型(Replica) - 生成:O(n)\
-    /// 参考: https://shuyo.hatenablog.com/entry/20101016/fsharp
+
     module private NumericLiteralG =
         let inline FromZero () = LanguagePrimitives.GenericZero
         let inline FromOne () = LanguagePrimitives.GenericOne
