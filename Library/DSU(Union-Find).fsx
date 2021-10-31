@@ -1,4 +1,3 @@
-// 永遠に完成しない roumcha/ac-library-fs のコピー
 // 参考: https://github.com/key-moon/ac-library-cs/blob/master/AtCoderLibrary/DSU.cs
 
 /// Disjoint Set Union (Union Find)
@@ -55,10 +54,9 @@ module DSU =
         let ind = Array.zeroCreate groupCount
         let slicedResult = Array.take groupCount result
         leaderBuf
-        |> Seq.iteri
-            (fun i ldr ->
-                let leaderID = id |> Array.item ldr
-                Array.set slicedResult.[leaderID] ind.[leaderID] i
-                Array.item leaderID ind + 1
-                |> Array.set ind leaderID)
+        |> Seq.iteri (fun i ldr ->
+            let leaderID = id |> Array.item ldr
+            Array.set slicedResult.[leaderID] ind.[leaderID] i
+            Array.item leaderID ind + 1
+            |> Array.set ind leaderID)
         slicedResult

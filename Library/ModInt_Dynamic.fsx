@@ -8,13 +8,11 @@ type DModInt =
     override this.ToString() = string this.V
     static member inline (+)(x: DModInt, y) = { x with V = (x.V + uint32 y) % x.M }
     static member inline (+)(x, y: DModInt) = { y with V = (uint32 x + y.V) % y.M }
-    /// バグ防止のため、Mod が異なる場合はエラーにする
     static member (+)(x: DModInt, y: DModInt) =
         if x.M <> y.M then failwith "Different Modulo!"
         x + y.V
     static member inline (-)(x: DModInt, y) = { x with V = (x.V - uint32 y) % x.M }
     static member inline (-)(x, y: DModInt) = { y with V = (uint32 x - y.V) % y.M }
-    /// バグ防止のため、Mod が異なる場合はエラーにする
     static member (-)(x: DModInt, y: DModInt) =
         if x.M <> y.M then failwith "Different Modulo!"
         x - y.V
@@ -22,7 +20,6 @@ type DModInt =
         { x with V = uint32 (uint64 x.V * uint64 y % uint64 x.M) }
     static member inline (*)(x, y: DModInt) =
         { y with V = uint32 (uint64 x * uint64 y.V % uint64 y.M) }
-    /// バグ防止のため、Mod が異なる場合はエラーにする
     static member (*)(x: DModInt, y: DModInt) =
         if x.M <> y.M then failwith "Different Modulo!"
         x * y.V
@@ -49,9 +46,9 @@ module DModInt =
             | 0UL -> res
             | i -> pownR (res * v % m) (i - 1UL)
         { DModInt.V =
-              match int64 n >= 0L with
-              | true -> pownR 1UL (uint64 n) |> uint32
-              | false -> 0u
+            match int64 n >= 0L with
+            | true -> pownR 1UL (uint64 n) |> uint32
+            | false -> 0u
           M = x.M }
 
 let inline dmodint modulo value = DModInt.create modulo value

@@ -60,7 +60,28 @@ module PermCombi =
         let rec lp lst =
             match lst with
             | [] -> seq { [] }
-            | head :: tail -> lp tail |> Seq.collect (allInsertions head)
-        lp (Seq.toList source) |> Seq.map seq
-    /// 組み合わせ全通り - できてない
-    let allCombinations source n = []
+            | h :: t -> lp t |> Seq.collect (allInsertions h)
+        Seq.toList source |> lp |> Seq.map seq
+
+    let nextPermutation ary =
+        let n = Array.length ary
+        let sw i j =
+            let t = Array.item i ary
+            ary.[i] <- ary.[j]
+            ary.[j] <- t
+
+        let l =
+            { n - 2 .. -1 .. 0 }
+            |> Seq.tryFind (fun i -> ary.[i] < ary.[i + 1])
+        match l with
+        | None -> false
+        | Some l ->
+
+        let r =
+            { n - 1 .. -1 .. l + 1 }
+            |> Seq.find (fun i -> ary.[l] <= ary.[i])
+        System.NotImplementedException() |> raise
+
+// match ary.[i] = ary.[j] with
+// | true
+// | false ->
