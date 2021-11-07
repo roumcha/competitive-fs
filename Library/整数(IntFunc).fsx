@@ -1,8 +1,7 @@
 /// ここにあるもの:\
 /// 商と余り, 切り上げ除算, 範囲の総和, 最大公約数, 最大公約数I, 最小公倍数, 最小公倍数I
 module IntFunc =
-    /// ジェネリック数値型(Replica) - 生成:O(n)\
-    /// 参考: https://shuyo.hatenablog.com/entry/20101016/fsharp
+    /// ジェネリック数値型(Replica) - 生成:O(n)
     module private NumericLiteralG =
         let inline FromZero () = LanguagePrimitives.GenericZero
         let inline FromOne () = LanguagePrimitives.GenericOne
@@ -18,15 +17,18 @@ module IntFunc =
     /// 範囲の総和 - O(1)
     let inline rangeSum min max = (max - min + 1G) * (min + max) / 2G
     /// gcd, lcm の内部ループ
-    let rec inline private gcdR x =
-        function
-        | y when y = 0G -> x
-        | y -> gcdR y (x % y)
-    /// 最大公約数 - O(log(min(x, y)))
+    let inline private gcdR x y =
+        let mutable x, y = x, y
+        while y <> 0G do
+            let tmp = x
+            x <- y
+            y <- tmp % y
+        x
+    /// 最大公約数 - O(log(max(x, y)))
     let inline gcd x y = gcdR (max x y) (min x y)
     /// 最大公約数I - O(わからん)
     let gcdI x y = bigint.GreatestCommonDivisor(x, y)
-    /// 最小公倍数 - O(log(min(x, y)))\
+    /// 最小公倍数 - O(log(max(x, y)))\
     /// オーバーフロー注意: x * y
     let inline lcm x y = x * y / gcdR (min x y) (max x y)
     /// 最小公倍数I - O(わからん)

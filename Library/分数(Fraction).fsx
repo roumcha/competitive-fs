@@ -11,9 +11,9 @@ type Frn(numer: int64, denom: int64) =
     /// O(log(min(n, d)))
     static let spl (n, d) =
         let div = gcd n d
-        match d >= 0L with
-        | true -> (n / div, d / div)
-        | false -> (n / div * -1L, d / div * -1L)
+        match n / div, d / div with
+        | n, d when d < 0L -> -n, -d
+        | n, d -> n, d
     let n, d =
         match numer, denom with
         | _, 0L -> System.DivideByZeroException() |> raise
@@ -25,8 +25,6 @@ type Frn(numer: int64, denom: int64) =
     new(numer: int) = Frn(int64 numer, 1L)
     member _.N = n
     member _.D = d
-    override x.ToString() = sprintf "Frn[%d/%d]" x.N x.D
-    override x.GetHashCode() = hash x
     static member (+)(x: Frn, y: Frn) = (x.N * y.D + y.N * x.D, x.D * y.D) |> spl |> Frn
     static member (-)(x: Frn, y: Frn) = (x.N * y.D - y.N * x.D, x.D * y.D) |> spl |> Frn
     static member (*)(x: Frn, y: Frn) = (x.N * y.N, x.D * y.D) |> spl |> Frn
@@ -34,12 +32,14 @@ type Frn(numer: int64, denom: int64) =
         match y.N with
         | 0L -> System.DivideByZeroException() |> raise
         | _ -> (x.N * y.D, x.D * y.N) |> spl |> Frn
-    override x.Equals y =
+    override _.Equals y =
         match y with
-        | :? Frn as y -> (x.N * y.D) = (y.N * x.D)
+        | :? Frn as y -> n = y.N && d = y.D
         | _ -> System.ArgumentException() |> raise
+    override _.GetHashCode() = n * d |> int
+    override _.ToString() = sprintf "Frn[%d/%d]" n d
     interface System.IComparable with
-        member x.CompareTo y =
+        member _.CompareTo y =
             match y with
-            | :? Frn as y -> compare (x.N * y.D) (y.N * x.D)
+            | :? Frn as y -> compare (n * y.D) (y.N * d)
             | _ -> System.ArgumentException() |> raise

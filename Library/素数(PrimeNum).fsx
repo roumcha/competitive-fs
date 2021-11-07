@@ -19,7 +19,7 @@ module PrimeNum =
                 let mutable i = g3
                 while i * i <= n do
                     yield i
-                    i <- i + 1G
+                    i <- i + g2
             }
             |> Seq.forall ((%) n >> (<>) 0G)
     /// 素数列挙 - O(u log log u)\
