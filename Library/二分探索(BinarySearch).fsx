@@ -10,7 +10,7 @@ module BinSearch =
             match abs (n - o), (o + n) / g2 with
             | c, _ when c <= g1 -> o
             | _, m when f m -> lp m n f
-            | _, mid -> lp o mid f
+            | _, m -> lp o m f
         lp ok ng condition
     /// 二分探索_挿入左 - O(log N)\
     /// ソートされた配列に対する、新要素の挿入位置(のうち最も左)を探索
