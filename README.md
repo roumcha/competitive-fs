@@ -6,5 +6,5 @@
 
 - Windows 10 or above
 - Visual Studio Code
-- .NET 5 SDK
+- .NET 6 SDK
 - Ionide-FSharp
