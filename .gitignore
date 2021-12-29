@@ -2,4 +2,4 @@
 .fake
 .exe
 .dll
-\#playground.fsx
+\#playground.*
