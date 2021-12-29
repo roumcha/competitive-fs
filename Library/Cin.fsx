@@ -2,7 +2,7 @@
 module Cin =
     let private q = System.Collections.Generic.Queue()
 
-    let inline cin _ =
+    let cin _ =
         while q.Count = 0 do
             for s in stdin.ReadLine().Split() do
                 if s <> null && s <> "" then q.Enqueue s
