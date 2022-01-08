@@ -1,3 +1,4 @@
+// バグってるーー－！！！使うな！！！ ABC234D がACできない
 module MyPriorityQueue =
     open System.Collections
     open System.Collections.Generic
