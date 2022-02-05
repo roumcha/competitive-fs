@@ -1,16 +1,16 @@
-// バグってるーー－！！！使うな！！！ ABC234D がACできない
+[<AutoOpen>]
 module MyPriorityQueue =
     open System.Collections
     open System.Collections.Generic
 
-    type MyPriorityQueue<'a>(?capacity, ?compareFunc) =
+    type MyPriorityQueue<'a>(?capacity, ?comparer) =
         let heap =
             match capacity with
             | Some (x: int) -> List<'a> x
             | None -> List()
         let mutable size = 0
-        let compareFunc =
-            match compareFunc with
+        let comparer =
+            match comparer with
             | Some cf -> cf
             | None -> fun a b -> Comparer.Default.Compare(a, b)
         let rec up pos =
@@ -18,7 +18,7 @@ module MyPriorityQueue =
             let mutable pos, flg = pos, true
             while pos > 0 && flg do
                 let parentPos = (pos - 1) / 2
-                match compareFunc elem heap.[parentPos] <= 0 with
+                match comparer elem heap.[parentPos] <= 0 with
                 | true -> flg <- false
                 | false ->
                     heap.[pos] <- heap.[parentPos]
@@ -30,10 +30,10 @@ module MyPriorityQueue =
             while childPos < size && flg do
                 if childPos + 1 < size then
                     childPos <-
-                        match compareFunc heap.[childPos] heap.[childPos + 1] with
+                        match comparer heap.[childPos] heap.[childPos + 1] with
                         | x when x >= 0 -> childPos
                         | _ -> childPos + 1
-                match compareFunc heap.[pos] heap.[childPos] >= 0 with
+                match comparer elem heap.[childPos] >= 0 with
                 | true -> flg <- false
                 | false ->
                     heap.[pos] <- heap.[childPos]
