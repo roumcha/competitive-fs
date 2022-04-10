@@ -16,7 +16,7 @@ let rec fib x =
     match x <= 2 with
     | true -> 1
     | false ->
-        // Use 'fib_memo' instead of 'fib' when recurse.
+        // Use 'fib_memo' instead of 'fib' when recursing.
         fib_memo (x - 1) + fib_memo (x - 2)
 
 and fib_memo = memoize fib
