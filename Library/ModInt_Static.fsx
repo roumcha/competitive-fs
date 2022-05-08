@@ -1,7 +1,6 @@
-// experimental
-// /, % がまだ
-
+// todo: /, %
 /// Static ModInt
+[<Struct>]
 type SModInt =
     { V: uint32 }
     override this.ToString() = string this.V

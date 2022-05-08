@@ -1,7 +1,6 @@
-// experimantal
-// / %がまだ
-
+// todo: /, %
 /// Dynamic ModInt
+[<Struct>]
 type DModInt =
     { V: uint32
       M: uint32 }
