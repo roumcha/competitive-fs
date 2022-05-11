@@ -40,6 +40,10 @@
             "|> stdout.WriteLine\n"
         ]
     },
+    "Stderr WriteLine": {
+        "prefix": "ew",
+        "body": "stderr.WriteLine"
+    },
     "If": {
         "prefix": "if",
         "body": "if $0 then"
@@ -88,5 +92,15 @@
     "EntryPoint": {
         "prefix": "ep",
         "body": "[<EntryPoint>]"
+    },
+    "Flush": {
+        "prefix": "flush",
+        "body": [
+            "let _w =",
+            "    new System.IO.StreamWriter(System.Console.OpenStandardOutput())",
+            "",
+            "_w.AutoFlush <- false",
+            "System.Console.SetOut _w\n"
+        ]
     }
 }
