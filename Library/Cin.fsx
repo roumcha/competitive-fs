@@ -5,5 +5,5 @@ module Cin =
     let cin _ =
         while q.Count = 0 do
             for s in stdin.ReadLine().Split() do
-                if s <> null && s <> "" then q.Enqueue s
+                if s <> "" then q.Enqueue s
         q.Dequeue()

@@ -1,33 +1,24 @@
-// todo: /, %
-/// Static ModInt
+// todo: /, %, pow, ...
+// todo: マイナス時補正してない
+/// Static ModInt (32bit)\
+/// !!DON'T USE THE CONSTRUCTOR!! Use ```smodint n``` or suffix N instead.
 [<Struct>]
-type SModInt =
-    { V: uint32 }
-    override this.ToString() = string this.V
-/// Static ModInt
-module SModInt =
+type SModInt(v: uint32) =
     [<Literal>]
-    let M = 1000000007u // ここを変える
+    static let m = 1000000007u // modify this
+    member _.V = v
+    override _.ToString() = string v
+    static member inline Zero = SModInt 0u
+    static member inline One = SModInt 1u
+    static member inline (+)(x: SModInt, y: SModInt) = SModInt((x.V + y.V) % m)
+    static member inline (-)(x: SModInt, y: SModInt) = SModInt((x.V + m - y.V) % m)
+    static member inline (*)(x: SModInt, y: SModInt) =
+        SModInt(uint32 (uint64 x.V * uint64 y.V % uint64 m))
 
-    let FromZero () = { SModInt.V = 0u }
-    let FromOne () = { SModInt.V = 1u }
-    let FromUInt32 (n: uint32) = { SModInt.V = n % M }
-    let FromInt32 (n: int) = FromUInt32(uint32 n)
-    let FromUInt64 (n: uint64) = { SModInt.V = uint32 (n % uint64 M) }
-    let FromInt64 (n: int64) = FromUInt64(uint64 n)
-    let value (smodint: SModInt) = smodint.V
+module NumericLiteralN =
+    let inline FromZero () = SModInt.Zero
+    let inline FromOne () = SModInt.One
+    let inline FromInt32 (n: int) = SModInt(uint32 n)
+    let inline FromInt64 (n: int64) = SModInt(uint32 n)
 
-type SModInt with
-    static member (+)(x: SModInt, y: SModInt) = SModInt.FromUInt32(x.V + y.V)
-    static member inline (+)(x: SModInt, y) = SModInt.FromUInt32(x.V + uint32 y)
-    static member inline (+)(x, y: SModInt) = SModInt.FromUInt32(uint32 x + y.V)
-    static member (-)(x: SModInt, y: SModInt) = SModInt.FromUInt32(x.V - y.V)
-    static member inline (-)(x: SModInt, y) = SModInt.FromUInt32(x.V - uint32 y)
-    static member inline (-)(x, y: SModInt) = SModInt.FromUInt32(uint32 x - y.V)
-    static member (*)(x: SModInt, y: SModInt) = SModInt.FromUInt64(uint64 x.V * uint64 y.V)
-    static member inline (*)(x: SModInt, y) = SModInt.FromUInt64(uint64 x.V * uint64 y)
-    static member inline (*)(x, y: SModInt) = SModInt.FromUInt64(uint64 x * uint64 y.V)
-
-/// 1N, 2N, ... と書ける
-module NumericLiteralN = SModInt // G(I)NQRZ しか suffix 空いてないみたい...
-let inline smodint n = SModInt.FromUInt64(uint64 n)
+let inline smodint n = n |> uint32 |> SModInt

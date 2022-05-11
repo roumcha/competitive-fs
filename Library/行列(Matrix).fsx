@@ -1,3 +1,4 @@
+// todo: 測定
 /// ここにあるもの:\
 /// 文字列形式に変換, 90度単位回転
 module Matrix =
@@ -11,6 +12,12 @@ module Matrix =
                 |> Seq.map (fun j -> matrix.[i, j])
                 |> fun sq -> sb.AppendJoin(' ', sq).Append('\n'))
             (StringBuilder())
+
+    // 文字2次元配列から文字列
+    let char2DArrayToString matrix =
+        { 0 .. Array2D.length1 matrix - 1 }
+        |> Seq.map (fun i -> matrix.[i, *] |> System.String)
+        |> String.concat "\n"
 
     /// 90度単位回転 - O(H*W)
     /// x軸を右、y軸を下として、時計回り

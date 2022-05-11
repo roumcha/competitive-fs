@@ -1,25 +1,24 @@
 // todo: /, %
 /// Dynamic ModInt
-[<Struct>]
 type DModInt =
     { V: uint32
       M: uint32 }
     override this.ToString() = string this.V
     static member inline (+)(x: DModInt, y) = { x with V = (x.V + uint32 y) % x.M }
     static member inline (+)(x, y: DModInt) = { y with V = (uint32 x + y.V) % y.M }
-    static member (+)(x: DModInt, y: DModInt) =
+    static member inline (+)(x: DModInt, y: DModInt) =
         if x.M <> y.M then failwith "Different Modulo!"
         x + y.V
     static member inline (-)(x: DModInt, y) = { x with V = (x.V - uint32 y) % x.M }
     static member inline (-)(x, y: DModInt) = { y with V = (uint32 x - y.V) % y.M }
-    static member (-)(x: DModInt, y: DModInt) =
+    static member inline (-)(x: DModInt, y: DModInt) =
         if x.M <> y.M then failwith "Different Modulo!"
         x - y.V
     static member inline (*)(x: DModInt, y) =
         { x with V = uint32 (uint64 x.V * uint64 y % uint64 x.M) }
     static member inline (*)(x, y: DModInt) =
         { y with V = uint32 (uint64 x * uint64 y.V % uint64 y.M) }
-    static member (*)(x: DModInt, y: DModInt) =
+    static member inline (*)(x: DModInt, y: DModInt) =
         if x.M <> y.M then failwith "Different Modulo!"
         x * y.V
 

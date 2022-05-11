@@ -30,10 +30,15 @@ module PrimeNum =
         | u when u < g2 -> List()
         | u ->
 
-        let res = List [ g2 ]
+        let res =
+            List(float u / (log (float u) - 1.) * 1.01 + 5. |> int)
+        res.Add g2
         for i in g3 .. g2 .. u do
             if Seq.forall ((%) i >> (<>) 0) res then res.Add i
         res
+
+    // todo: 素数列挙(エラトステネスの篩版)
+
     /// 素因数分解 - O(なんだっけ)
     let inline primeFact n =
         let g2, g3 = 2G, 3G

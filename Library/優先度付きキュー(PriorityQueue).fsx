@@ -61,5 +61,3 @@ module MyPriorityQueue =
             size <- size - 1
             down 0
             res
-
-open MyPriorityQueue
