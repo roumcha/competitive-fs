@@ -4,7 +4,7 @@
 type DSU = { Count: int; ParentOrSize: int [] }
 /// Disjoint Set Union (Union Find)
 module DSU =
-    let create count =
+    let inline create count =
         { Count = count; ParentOrSize = Array.create count -1 }
 
     let rec leader a dsu =
@@ -15,7 +15,7 @@ module DSU =
         dsu.ParentOrSize.[a] <- leader dsu.ParentOrSize.[a] dsu
         dsu.ParentOrSize.[a]
 
-    let merge dsu a b =
+    let inline merge dsu a b =
         assert (0 <= a && a < dsu.Count || 0 <= b && b < dsu.Count)
         match leader a dsu, leader b dsu with
         | x, y when x = y -> x
@@ -29,15 +29,15 @@ module DSU =
         dsu.ParentOrSize.[y] <- x
         x
 
-    let same a b dsu =
+    let inline same a b dsu =
         assert (0 <= a && a < dsu.Count || 0 <= b && b < dsu.Count)
         leader a dsu = leader b dsu
 
-    let size a dsu =
+    let inline size a dsu =
         assert (0 <= a && a < dsu.Count)
         -dsu.ParentOrSize.[leader a dsu]
 
-    let groups dsu =
+    let inline groups dsu =
         let leaderBuf = Array.init dsu.Count (fun i -> leader i dsu)
         let id = Array.zeroCreate dsu.Count
         let result = Array.zeroCreate<int []> dsu.Count
