@@ -16,20 +16,3 @@ module IntFunc =
     let inline divCeil divided divisor = (divided + divisor - 1G) / divisor
     /// 範囲の総和 - O(1)
     let inline rangeSum min max = (max - min + 1G) * (min + max) / 2G
-    /// gcd, lcm の内部ループ
-    let inline private gcdL x y =
-        let mutable x, y = x, y
-        while y <> 0G do
-            let tmp = x
-            x <- y
-            y <- tmp % y
-        x
-    /// 最大公約数 - O(log(max(x, y)))
-    let inline gcd x y = gcdL (max x y) (min x y)
-    /// 最大公約数I - O(わからん)
-    let inline gcdI x y = bigint.GreatestCommonDivisor(x, y)
-    /// 最小公倍数 - O(log(max(x, y)))\
-    /// オーバーフロー注意: x * y
-    let inline lcm x y = x * y / gcdL (min x y) (max x y)
-    /// 最小公倍数I - O(わからん)
-    let inline lcmI x y = x * y / bigint.GreatestCommonDivisor(x, y)
