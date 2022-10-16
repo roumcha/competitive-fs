@@ -11,4 +11,4 @@
 
 ## 利用許諾
 
-[MIT No Attribution ライセンス](LICENSE)です。
+[MIT No Attribution ライセンス](LICENSE)です。ライセンス表記なしで使用することができます。
