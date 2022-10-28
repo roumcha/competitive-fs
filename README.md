@@ -8,3 +8,7 @@
 - Visual Studio Code
 - .NET 6 SDK
 - Ionide-FSharp
+
+## 利用許諾
+
+[CC0 ライセンス](LICENSE)です。ライセンス表記なしで使用することができます。
