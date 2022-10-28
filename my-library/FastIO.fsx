@@ -67,7 +67,7 @@ module COut =
         override _.FormatProvider =
             Globalization.CultureInfo.InvariantCulture :> IFormatProvider
 
-    let inline noflush () =
+    let noflush () =
         let w = new O(Console.OpenStandardOutput())
         w.AutoFlush <- false
         Console.SetOut w
