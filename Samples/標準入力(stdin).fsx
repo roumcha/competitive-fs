@@ -14,17 +14,17 @@ let s3 = stdin.ReadLine().Split()
 let a = stdin.ReadLine().Split() |> Array.map int
 
 // 行 -> 空白区切り -> 分けて代入
+// メリット: 警告出ない、個別に型変換できる(次項)
+// デメリット: 長くて書きづらい
+let x2, y2 =
+    stdin.ReadLine().Split() |> fun a -> a.[0], a.[1]
+
+// 行 -> 空白区切り -> 分けて代入 (別解)
 // メリット: 短く書ける
 // デメリット: すべて同じ型限定、パターンマッチ警告が出る
 // 警告を消すには、ファイルの頭に #nowarn "25"
 #nowarn "25"
 let [| x; y |] = stdin.ReadLine().Split()
-
-// 行 -> 空白区切り -> 分けて代入 (別解)
-// メリット: 警告出ない、個別に型変換できる(次項)
-// デメリット: 長くて書きづらい
-let x2, y2 =
-    stdin.ReadLine().Split() |> fun a -> a.[0], a.[1]
 
 // 行 -> 空白区切り -> バラバラの型 -> 分けて代入
 let x3, y3, z3 =
