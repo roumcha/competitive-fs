@@ -74,5 +74,8 @@ module COut =
 
     let inline flush () = stdout.Flush()
 
-// pre: COut.noflush ()
-// post: COut.flush ()
+COut.noflush ()
+
+// ここにコードを書く
+
+COut.flush ()
